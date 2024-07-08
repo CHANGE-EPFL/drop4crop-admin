@@ -9,6 +9,6 @@ export default {
     edit: LayerEdit,
     list: LayerList,
     show: LayerShow,
-    recordRepresentation: 'name.en',
+    recordRepresentation: 'name',
     icon: MapIcon,
 };

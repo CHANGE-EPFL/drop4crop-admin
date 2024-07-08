@@ -1,5 +1,6 @@
 /* eslint react/jsx-key: off */
 import {
+    BooleanInput,
     Edit,
     ReferenceInput,
     SelectInput,
@@ -7,25 +8,30 @@ import {
     TextInput,
     required
 } from 'react-admin';
+import {
+    globalWaterModelsItems,
+    climateModelsItems,
+    cropItems,
+    scenariosItems,
+    variablesItems,
+    yearItems
+} from '../options';
 
 const LayerEdit = () => {
     return (
         <Edit>
             <SimpleForm>
                 <TextInput disabled label="Id" source="id" />
-                <TextInput source="name" validate={required()} />
-                <TextInput source="description" />
-                <ReferenceInput
-                    source="project_id"
-                    reference="projects"
-                    sort={{ field: 'name', order: 'ASC' }}
-                >
-                    <SelectInput
-                        label="Associated project"
-                        source="projects_id"
-                        optionText={(record) => `${record.name}`}
-                        validate={required()}
-                    />
+                <TextInput source="layer_name" disabled />
+                <SelectInput source="crop" choices={cropItems} required />
+                <SelectInput source="water_model" choices={globalWaterModelsItems} />
+                <SelectInput source="climate_model" choices={climateModelsItems} />
+                <SelectInput source="scenario" choices={scenariosItems} />
+                <SelectInput source="variable" choices={variablesItems} />
+                <SelectInput source="year" choices={yearItems} />
+                <BooleanInput source="enabled" required />
+                <ReferenceInput source="style_name" reference="styles" >
+                    <SelectInput />
                 </ReferenceInput>
             </SimpleForm>
         </Edit>
