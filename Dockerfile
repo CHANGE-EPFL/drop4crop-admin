@@ -1,20 +1,32 @@
-FROM node:22.3.0-alpine AS builder
+# Stage 1: Build the react app
+FROM node:16-alpine AS build
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
-# Copy the rest of your application source code to the container
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
-RUN yarn build
 
-FROM nginx:1.27-alpine
+# Build the app
+RUN npm run build
 
-COPY --from=builder /app/dist /usr/share/nginx/html
-# Expose the port your application will listen on (if applicable)
+# Stage 2: Serve the app with nginx
+FROM nginx:stable-alpine
+
+# Copy the built app from the previous stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose the port nginx is running on
 EXPOSE 80
 
-# Start your Yarn application
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
