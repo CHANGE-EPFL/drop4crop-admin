@@ -1,5 +1,115 @@
-import MyAdmin from "./admin";
+/* eslint react/jsx-key: off */
+import { useState, useRef, useEffect } from 'react';
+import {
+    Admin,
+    Resource,
+    AuthProvider,
+    DataProvider,
+} from 'react-admin';
+import { Route } from 'react-router-dom';
+import simpleRestProvider from './dataProvider/index'
+import Keycloak, {
+    KeycloakTokenParsed,
+    KeycloakInitOptions,
+} from 'keycloak-js';
+import { httpClient } from 'ra-keycloak';
+import { keycloakAuthProvider } from './authProvider';
+import Layout from './Layout';
+import users from './users';
+import sensors from './sensors';
+import areas from "./areas";
+import plots from './plots';
+import soil from './soil';
+import projects from './projects';
+import transects from './transects';
+import layers from './layers';
+import axios from 'axios';
 
-const App = () => <MyAdmin />;
+const initOptions: KeycloakInitOptions = {
+    onLoad: 'login-required',
+    checkLoginIframe: false,
+};
 
+const getPermissions = (decoded: KeycloakTokenParsed) => {
+    const roles = decoded?.realm_access?.roles;
+    if (!roles) {
+        return false;
+    }
+    if (roles.includes('admin')) return 'admin';
+    if (roles.includes('user')) return 'user';
+    return false;
+};
+
+
+const apiKeycloakConfigUrl = '/api/config/keycloak';
+export const apiUrl = '/api';
+
+const App = () => {
+    const [keycloak, setKeycloak] = useState();
+    const [loading, setLoading] = useState(true);
+    const authProvider = useRef<AuthProvider>();
+    const dataProvider = useRef<DataProvider>();
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(apiKeycloakConfigUrl);
+                const keycloakConfig = response.data;
+
+                // Initialize Keycloak here, once you have the configuration
+                const keycloakClient = new Keycloak(keycloakConfig);
+                await keycloakClient.init(initOptions);
+                authProvider.current = keycloakAuthProvider(keycloakClient, {
+                    onPermissions: getPermissions,
+                });
+                dataProvider.current = simpleRestProvider(
+                    apiUrl,
+                    httpClient(keycloakClient)
+                );
+                setKeycloak(keycloakClient);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false);
+            }
+        }
+
+        fetchData();
+    }, []);
+
+
+    // hide the admin until the dataProvider and authProvider are ready
+    if (!keycloak & loading) return <p>Loading...</p>;
+
+    return (
+        <Admin
+            authProvider={authProvider.current}
+            dataProvider={dataProvider.current}
+            title="SOIL Sensor Map"
+            layout={Layout}
+        >
+            {permissions => (
+                <>
+                    <Resource name="projects" {...projects} />
+                    <Resource name="areas" {...areas} />
+                    <Resource name="plots" {...plots.plot} />
+                    <Resource name="plot_samples" {...plots.sample} />
+                    <Resource name="sensors" {...sensors.sensor} />
+                    <Resource name="sensordata" {...sensors.sensordata} />
+                    <Resource name="soil_profiles" {...soil.profile} />
+                    <Resource name="soil_types" {...soil.type} />
+                    <Resource name="transects" {...transects} />
+                    <Resource name="layers" {...layers} />
+                    {permissions ? (
+                        <>
+                            {permissions === 'admin' ? (
+                                <Resource name="users" {...users} />
+                            ) : null}
+                        </>
+                    ) : null}
+                </>
+            )}
+        </Admin>
+    );
+};
 export default App;

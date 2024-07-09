@@ -1,8 +1,6 @@
 {
-  "name": "drop4crop-admin",
+  "name": "sensormap-frontend",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
@@ -12,22 +10,43 @@
     "format": "prettier --write ./src"
   },
   "dependencies": {
-    "ra-data-json-server": "^5.0.3",
-    "ra-data-simple-rest": "^5.0.3",
-    "react": "^18.3.1",
-    "react-admin": "^5.0.3",
-    "react-dom": "^18.3.1"
+    "axios": "^1.6.0",
+    "keycloak-js": "^24.0.5",
+    "leaflet": "^1.9.4",
+    "leaflet-draw": "^1.0.4",
+    "leaflet-tilelayer-swiss": "^2.3.0",
+    "leaflet.awesome-markers": "^2.0.5",
+    "ol": "^9.2.4",
+    "papaparse": "^5.4.1",
+    "plotly.js": "^2.33.0",
+    "ra-data-fakerest": "^4.14.0",
+    "ra-data-simple-rest": "^4.15.2",
+    "ra-keycloak": "^1.0.0",
+    "react": "^18.2.0",
+    "react-admin": "^4.16.18",
+    "react-admin-color-picker": "^1.0.3",
+    "react-admin-import-csv": "^4.0.2",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-leaflet": "^4.2.1",
+    "react-leaflet-cluster": "^2.1.0",
+    "react-leaflet-draw": "^0.20.4",
+    "react-plotly.js": "^2.6.0",
+    "recharts": "^2.9.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
-    "@vitejs/plugin-react": "^4.3.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.0.22",
+    "@types/react-dom": "^18.0.7",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@typescript-eslint/parser": "^7.12.0",
+    "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^9.4.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.3.1",
+    "typescript": "^5.1.6",
+    "vite": "^5.2.13"
   }
 }
