@@ -26,13 +26,21 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
 const StyleSelectMenu = () => {
-    const { data, loading, error } = useGetList('styles');
-    if (loading) return <Loading />;
     const [selectedStyle, setSelectedStyle] = useState(null);
+    const { data, loading, error } = useGetList('styles');
+
+    if (loading) return <Loading />;
+    if (!data) return null;
 
     const handleChange = (event: SelectChangeEvent) => {
         setSelectedStyle(event.target.value);
     };
+
+    const MenuItems = data.map(style => (
+        <MenuItem key={style.id} value={style.id}>
+            {style.name}
+        </MenuItem>
+    ));
 
     return (
         <>
@@ -42,11 +50,7 @@ const StyleSelectMenu = () => {
                 value={selectedStyle}
                 onChange={handleChange}
             >
-                {data.map(style => (
-                    <MenuItem key={style.id} value={style.id}>
-                        {style.name}
-                    </MenuItem>
-                ))}
+                {MenuItems}
             </Select>
             <BulkUpdateButton data={{
                 style_name: selectedStyle
