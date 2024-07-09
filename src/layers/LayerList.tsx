@@ -24,6 +24,8 @@ import {
 import { Fragment, useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
 
 const StyleSelectMenu = () => {
     const [selectedStyle, setSelectedStyle] = useState(null);
@@ -44,17 +46,20 @@ const StyleSelectMenu = () => {
 
     return (
         <>
-            <Typography variant="subtitle1">Bulk modify style</Typography>
+
             <Select
                 label="Style"
                 value={selectedStyle}
                 onChange={handleChange}
+
             >
                 {MenuItems}
             </Select>
-            <BulkUpdateButton data={{
-                style_name: selectedStyle
-            }} />
+            <BulkUpdateButton
+                label="Update style"
+                data={{
+                    style_name: selectedStyle
+                }} />
         </>
     );
 }
@@ -66,6 +71,8 @@ const BulkActionButtons = () => {
     // use with the BulkUpdateButton
     return (
         <Fragment>
+            <BulkUpdateButton label="Disable" data={{ enabled: false }} />
+            <BulkUpdateButton label="Enable" data={{ enabled: true }} />
             <StyleSelectMenu />
             <BulkExportButton />
             <BulkDeleteButton />
@@ -78,6 +85,15 @@ export const FilterSidebar = () => {
     return (
         <Card sx={{ order: -1, mr: 2, mt: 6, width: 200 }}>
             <CardContent>
+                <FilterList label="Crop" icon={<CategoryIcon />}>
+                    {cropItems.map(item => (
+                        <FilterListItem
+                            key={item.id}
+                            label={item.name}
+                            value={{ crop: item.id }}
+                        />
+                    ))}
+                </FilterList>
                 <FilterList label="Water model" icon={<MailIcon />}>
                     {globalWaterModelsItems.map(item => (
                         <FilterListItem
@@ -93,15 +109,6 @@ export const FilterSidebar = () => {
                             key={item.id}
                             label={item.name}
                             value={{ climate_model: item.id }}
-                        />
-                    ))}
-                </FilterList>
-                <FilterList label="Crop" icon={<CategoryIcon />}>
-                    {cropItems.map(item => (
-                        <FilterListItem
-                            key={item.id}
-                            label={item.name}
-                            value={{ crop: item.id }}
                         />
                     ))}
                 </FilterList>
