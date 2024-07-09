@@ -5,9 +5,9 @@ import {
     Resource,
     AuthProvider,
     DataProvider,
+    Loading,
 } from 'react-admin';
-import { Route } from 'react-router-dom';
-import simpleRestProvider from './dataProvider/index'
+import simpleRestProvider from 'ra-data-simple-rest';
 import Keycloak, {
     KeycloakTokenParsed,
     KeycloakInitOptions,
@@ -16,15 +16,10 @@ import { httpClient } from 'ra-keycloak';
 import { keycloakAuthProvider } from './authProvider';
 import Layout from './Layout';
 import users from './users';
-import sensors from './sensors';
-import areas from "./areas";
-import plots from './plots';
-import soil from './soil';
-import projects from './projects';
-import transects from './transects';
+import styles from './styles';
 import layers from './layers';
 import axios from 'axios';
-
+import { defaultTheme } from 'react-admin';
 const initOptions: KeycloakInitOptions = {
     onLoad: 'login-required',
     checkLoginIframe: false,
@@ -39,7 +34,6 @@ const getPermissions = (decoded: KeycloakTokenParsed) => {
     if (roles.includes('user')) return 'user';
     return false;
 };
-
 
 const apiKeycloakConfigUrl = '/api/config/keycloak';
 export const apiUrl = '/api';
@@ -79,31 +73,33 @@ const App = () => {
 
 
     // hide the admin until the dataProvider and authProvider are ready
-    if (!keycloak & loading) return <p>Loading...</p>;
+    if (!keycloak & loading) return <Loading />;
 
+
+    const theme = {
+        ...defaultTheme,
+        sidebar: {
+            width: 150, // The default value is 240
+        },
+    };
     return (
         <Admin
             authProvider={authProvider.current}
             dataProvider={dataProvider.current}
             title="SOIL Sensor Map"
             layout={Layout}
+            theme={theme}
         >
             {permissions => (
                 <>
-                    <Resource name="projects" {...projects} />
-                    <Resource name="areas" {...areas} />
-                    <Resource name="plots" {...plots.plot} />
-                    <Resource name="plot_samples" {...plots.sample} />
-                    <Resource name="sensors" {...sensors.sensor} />
-                    <Resource name="sensordata" {...sensors.sensordata} />
-                    <Resource name="soil_profiles" {...soil.profile} />
-                    <Resource name="soil_types" {...soil.type} />
-                    <Resource name="transects" {...transects} />
-                    <Resource name="layers" {...layers} />
                     {permissions ? (
                         <>
                             {permissions === 'admin' ? (
-                                <Resource name="users" {...users} />
+                                <>
+                                    <Resource name="layers" {...layers} />
+                                    <Resource name="styles" {...styles} />
+                                    <Resource name="users" {...users} />
+                                </>
                             ) : null}
                         </>
                     ) : null}
