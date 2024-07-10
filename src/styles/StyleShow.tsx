@@ -8,7 +8,7 @@ import {
 export const StyleShow = () => {
     return (
         <Show >
-            <SimpleShowLayout>
+            <SimpleShowLayout >
                 <TextField source="name" />
                 <TextField source="filename" />
                 <DateField source="dateCreated" showTime />
@@ -17,7 +17,7 @@ export const StyleShow = () => {
                 <TextField source="languageVersion.version" label="Version" />
                 <TextField source="variable" />
                 <TextField source="year" />
-                <TextField source="sld" component='pre' flexWrap />
+                <TextField source="sld" component='pre' width={100} />
             </SimpleShowLayout>
         </Show>
     )

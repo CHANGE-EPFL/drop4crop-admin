@@ -13,9 +13,8 @@ const StyleEdit = () => {
     return (
         <Edit>
             <SimpleForm>
-                <TextField source="id" />
-                <TextInput source="name" validate={[required()]} />
-                <TextInput source="sld" validate={[required()]} multiline />
+                <TextInput source="id" disabled />
+                <TextInput source="sld" validate={[required()]} multiline fullWidth component='pre' />
             </SimpleForm>
         </Edit>
     )
