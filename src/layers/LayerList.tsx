@@ -8,6 +8,7 @@ import {
     BulkUpdateButton,
     useGetList,
     Loading,
+    Pagination,
 } from "react-admin";
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
@@ -65,8 +66,6 @@ const StyleSelectMenu = () => {
 }
 
 const BulkActionButtons = () => {
-
-
     // Use the data from the styles endpoint to populate a drop down to
     // use with the BulkUpdateButton
     return (
@@ -147,11 +146,18 @@ export const FilterSidebar = () => {
 
 
 export const LayerList = () => {
+
+    const PostPagination = props => (
+        <Pagination rowsPerPageOptions={[10, 25, 50, 100, 250]} {...props} />
+    );
+
     return (
         <List
+            queryOptions={{ refetchInterval: 5000 }}
             aside={<FilterSidebar />}
             storeKey={false}
-            perPage={10}
+            perPage={50}
+            pagination={<PostPagination />}
         >
             <Datagrid rowClick="show" bulkActionButtons={<BulkActionButtons />}>
                 <TextField source="crop" />

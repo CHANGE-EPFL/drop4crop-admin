@@ -7,7 +7,8 @@ import {
     DataProvider,
     Loading,
 } from 'react-admin';
-import simpleRestProvider from 'ra-data-simple-rest';
+// import simpleRestProvider from 'ra-data-simple-rest';
+import simpleRestProvider from './dataProvider/index'
 import Keycloak, {
     KeycloakTokenParsed,
     KeycloakInitOptions,

@@ -159,18 +159,13 @@ const dataProvider = (
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({ data: json }));
     },
-
     // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
-    updateMany: (resource, params) =>
-        Promise.all(
-            params.ids.map(id =>
-                httpClient(`${apiUrl}/${resource}/${id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify(params.data),
-                })
-            )
-        ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-
+    updateMany: async (resource, params) => {
+        return httpClient(`${apiUrl}/${resource}/batch`, {
+            method: 'PUT',
+            body: JSON.stringify({ ids: params.ids, data: params.data }),
+        }).then(({ json }) => ({ data: json }));
+    },
     create: async (resource, params) => {
         params = await handleBinaryUpload(resource, params);
         return httpClient(`${apiUrl}/${resource}`, {
@@ -178,7 +173,6 @@ const dataProvider = (
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({ data: json }));
     },
-
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',
