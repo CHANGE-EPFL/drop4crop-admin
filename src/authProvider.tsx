@@ -103,4 +103,7 @@ export const keycloakAuthProvider = (
         }
         return Promise.reject('Failed to get identity.');
     },
+    getToken() {
+        return client.token;
+    }
 });

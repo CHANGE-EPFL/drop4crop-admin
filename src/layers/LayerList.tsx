@@ -4,11 +4,18 @@ import {
     TextField,
     BooleanField,
     BulkDeleteButton,
+    DatagridConfigurable,
+    SelectColumnsButton,
     BulkExportButton,
     BulkUpdateButton,
     useGetList,
     Loading,
     Pagination,
+    DateField,
+    TopToolbar,
+    CreateButton,
+    ExportButton,
+    FilterButton,
 } from "react-admin";
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
@@ -27,6 +34,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
+import { FilePondUploaderList } from './uploader/FilePond';
 
 const StyleSelectMenu = () => {
     const [selectedStyle, setSelectedStyle] = useState(null);
@@ -93,6 +101,15 @@ export const FilterSidebar = () => {
     return (
         <Card sx={{ order: -1, mr: 2, mt: 6, width: 200 }}>
             <CardContent>
+                <Typography variant="h6" gutterBottom>
+                    Filters
+                </Typography>
+
+                <FilterList label="Enabled" icon={<CategoryIcon />}>
+                    <FilterListItem label="True" value={{ enabled: true }} />
+                    <FilterListItem label="False" value={{ enabled: false }} />
+                </FilterList>
+
                 <FilterList label="Crop" icon={<CategoryIcon />}>
                     {cropItems.map(item => (
                         <FilterListItem
@@ -152,7 +169,13 @@ export const FilterSidebar = () => {
         </Card>
     )
 };
-
+const ListActions = () => (
+    <TopToolbar>
+        <SelectColumnsButton />
+        <CreateButton />
+        <ExportButton />
+    </TopToolbar>
+);
 
 export const LayerList = () => {
 
@@ -167,8 +190,10 @@ export const LayerList = () => {
             storeKey={false}
             perPage={50}
             pagination={<PostPagination />}
+            actions={<ListActions />}
         >
-            <Datagrid rowClick="show" bulkActionButtons={<BulkActionButtons />}>
+            <FilePondUploaderList />
+            <DatagridConfigurable rowClick="show" bulkActionButtons={<BulkActionButtons />}>
                 <TextField source="crop" />
                 <TextField source="water_model" />
                 <TextField source="climate_model" />
@@ -177,7 +202,9 @@ export const LayerList = () => {
                 <TextField source="year" />
                 <BooleanField source="enabled" />
                 <TextField source="style_name" />
-            </Datagrid>
+                <DateField source="last_updated" showTime />
+                <DateField source="uploaded_at" label="Uploaded at (UTC)" showTime />
+            </DatagridConfigurable>
         </List>
     );
 };

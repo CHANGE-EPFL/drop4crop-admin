@@ -2473,6 +2473,16 @@ file-selector@^0.5.0:
   dependencies:
     tslib "^2.0.3"
 
+filepond-plugin-file-validate-type@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.2.9.tgz#84787c027354a459d91382e77adc9463ceb0182d"
+  integrity sha512-Tzv07aNdZvjUXDRA3XL16QMEvh6llDrXlcZ6W0eTHQ+taHaVg/JKJTFs/AViO+6ZcpPCcQStbhYEL2HoS+vldw==
+
+filepond@^4.31.1:
+  version "4.31.1"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-4.31.1.tgz#42550897ddf614ac03c5322e6b16bd6e9e98844c"
+  integrity sha512-yWYK91Ky72L2AG7BlI8Cb0UjvJz+DjuYdLN1JbkJg8qmoiZ9AU5b5MuOkHmExk/9jQ5R7tRT+H+b8wDiFEJlxQ==
+
 fill-range@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-7.1.1.tgz#44265d3cac07e3ea7dc247516380643754a05292"
@@ -4146,6 +4156,11 @@ react-error-boundary@^3.1.4:
   integrity sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==
   dependencies:
     "@babel/runtime" "^7.12.5"
+
+react-filepond@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-7.1.2.tgz#8f04d06396a59b5980dda479c095ed23e6d1f68b"
+  integrity sha512-vrlx9o/n+jGikh6jLey+PpUGYtEZn8MdeB6JFeX/5/N/Mu75IHG+MFQbv8R27bNXvS41mDtV9Fo5DG+s6siVIA==
 
 react-hook-form@^7.43.9:
   version "7.51.5"
