@@ -25,7 +25,7 @@ export const FilePondUploaderList = () => {
             credits={false}
             // chunkSize={50000000}
             timeout={200}
-            maxParallelUploads={10}
+            maxParallelUploads={5}
             allowRevert={false}
             allowRemove={false}
             stylePanelLayout={'compact'}
