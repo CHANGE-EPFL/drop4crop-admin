@@ -30,7 +30,7 @@ export const FilePondUploaderList = () => {
             allowRemove={false}
             stylePanelLayout={'compact'}
             server={{
-                url: '/api/layers/upload',
+                url: '/api/layers/uploads',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Transect-Id': "",
