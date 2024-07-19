@@ -21,6 +21,8 @@ import styles from './styles';
 import layers from './layers';
 import axios from 'axios';
 import { defaultTheme } from 'react-admin';
+import Dashboard from './Dashboard';
+
 const initOptions: KeycloakInitOptions = {
     onLoad: 'login-required',
     checkLoginIframe: false,
@@ -90,6 +92,7 @@ const App = () => {
             title="SOIL Sensor Map"
             layout={Layout}
             theme={theme}
+            dashboard={Dashboard}
         >
             {permissions => (
                 <>

@@ -58,6 +58,7 @@ const StyleSelectMenu = () => {
             </Select>
             <BulkUpdateButton
                 label="Update style"
+                mutationMode="pessimistic"
                 data={{
                     style_name: selectedStyle
                 }} />
@@ -70,11 +71,19 @@ const BulkActionButtons = () => {
     // use with the BulkUpdateButton
     return (
         <Fragment>
-            <BulkUpdateButton label="Disable" data={{ enabled: false }} />
-            <BulkUpdateButton label="Enable" data={{ enabled: true }} />
+            <BulkUpdateButton
+                label="Disable"
+                mutationMode="pessimistic"
+                data={{ enabled: false }}
+            />
+            <BulkUpdateButton
+                label="Enable"
+                mutationMode="pessimistic"
+                data={{ enabled: true }}
+            />
             <StyleSelectMenu />
             <BulkExportButton />
-            <BulkDeleteButton />
+            {/* <BulkDeleteButton mutationMode="pessimistic"/> */}
         </Fragment >
     )
 };
@@ -167,7 +176,7 @@ export const LayerList = () => {
                 <TextField source="variable" />
                 <TextField source="year" />
                 <BooleanField source="enabled" />
-                <TextField source="style_name" sortable={false} />
+                <TextField source="style_name" />
             </Datagrid>
         </List>
     );

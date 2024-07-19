@@ -207,6 +207,11 @@ const dataProvider = (
             method: 'PUT',
             body: JSON.stringify(items),
         }).then(({ json }) => ({ data: json }));
+    },
+    syncStylesToLayer: async () => {
+        return httpClient(`${apiUrl}/layers/sync_styles`, {
+            method: 'POST'
+        }).then(({ json }) => ({ data: json }));
     }
 });
 
