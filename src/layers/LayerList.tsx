@@ -15,7 +15,12 @@ import {
     TopToolbar,
     CreateButton,
     ExportButton,
-    FilterButton,
+    useUpdateMany,
+    useListContext,
+    useNotificationContext,
+    useNotify,
+    useRefresh,
+    useUnselectAll,
 } from "react-admin";
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
@@ -32,19 +37,33 @@ import {
 import { Fragment, useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
-import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
 import { FilePondUploaderList } from './uploader/FilePond';
 
 const StyleSelectMenu = () => {
-    const [selectedStyle, setSelectedStyle] = useState(null);
-    const { data, loading, error } = useGetList('styles');
+    const { data, loading, error: errorGetStyles } = useGetList('styles');
+    const [updateMany, { isPending, error: errorUpdateMany }] = useUpdateMany();
+    const { selectedIds } = useListContext();
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const unselectAll = useUnselectAll('layers');
 
     if (loading) return <Loading />;
     if (!data) return null;
 
     const handleChange = (event: SelectChangeEvent) => {
-        setSelectedStyle(event.target.value);
+        // Update the selected style for all selected layers
+        updateMany(
+            'layers',
+            { ids: selectedIds, data: { style_name: event.target.value } }
+        ).then(() => {
+            // Refresh the list to reflect the changes
+            refresh();
+            unselectAll();
+            notify('Updating layer style (this may take some time in the background)');
+
+        }).catch(() => {
+            notify('Error updating layer style');
+        });
     };
 
     const MenuItems = data.map(style => (
@@ -55,21 +74,19 @@ const StyleSelectMenu = () => {
 
     return (
         <>
-
             <Select
                 label="Style"
-                value={selectedStyle}
+                // value={selectedStyle}
                 onChange={handleChange}
-
+                displayEmpty
+                renderValue={(value) => (value ? data.find(style => style.id === value)?.name : "Select style")}
+                sx={{ height: '32px' }} // Add this line to shrink the height
             >
+                <MenuItem disabled value="">
+                    <em>Select style</em>
+                </MenuItem>
                 {MenuItems}
             </Select>
-            <BulkUpdateButton
-                label="Update style"
-                mutationMode="pessimistic"
-                data={{
-                    style_name: selectedStyle
-                }} />
         </>
     );
 }
