@@ -89,6 +89,7 @@ const BulkActionButtons = () => {
                 mutationMode="pessimistic"
                 data={{ enabled: true }}
             />
+            <BulkDeleteButton mutationMode="pessimistic" />
             <StyleSelectMenu />
             <BulkExportButton />
             {/* <BulkDeleteButton mutationMode="pessimistic"/> */}
@@ -180,7 +181,10 @@ const ListActions = () => (
 export const LayerList = () => {
 
     const PostPagination = props => (
-        <Pagination rowsPerPageOptions={[10, 25, 50, 100, 250]} {...props} />
+        <Pagination
+            rowsPerPageOptions={[10, 25, 50, 100, 250, 500, 1000]}
+            {...props}
+        />
     );
 
     return (
@@ -188,12 +192,17 @@ export const LayerList = () => {
             queryOptions={{ refetchInterval: 5000 }}
             aside={<FilterSidebar />}
             storeKey={false}
-            perPage={50}
+            perPage={25}
             pagination={<PostPagination />}
             actions={<ListActions />}
+            sort={{ field: 'uploaded_at', order: 'DESC' }}
+            empty={false}
         >
             <FilePondUploaderList />
-            <DatagridConfigurable rowClick="show" bulkActionButtons={<BulkActionButtons />}>
+            <DatagridConfigurable
+                rowClick="show"
+                bulkActionButtons={<BulkActionButtons />}
+            >
                 <TextField source="crop" />
                 <TextField source="water_model" />
                 <TextField source="climate_model" />
