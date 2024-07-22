@@ -48,6 +48,11 @@ export const FilePondUploaderList = () => {
                 }
             }}
             onprocessfile={(error, file) => {
+                // Only remove the file if it was successfully uploaded
+                if (error) {
+                    return;
+                }
+
                 setTimeout(() => {
                     console.log('remove file');
                     pondRef.current.removeFile(file.id);
