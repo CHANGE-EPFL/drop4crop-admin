@@ -22,21 +22,21 @@ export const FilePondUploaderList = () => {
             ref={pondRef}
             // Accepts only tif/geotiff
             acceptedFileTypes={['image/tiff', 'image/geotiff']}
-            chunkUploads={true}
+            chunkUploads={false}
             onprocessfiles={refresh}
             allowMultiple={true}
             credits={false}
             timeout={200}
             maxParallelUploads={5}
-            chunkForce={true}
             allowRevert={false}
             allowRemove={false}
             stylePanelLayout={'compact'}
             server={{
                 url: '/api/layers/uploads',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
+
             }}
             onerror={(error, file) => {
                 console.error("File upload error", error, file);
