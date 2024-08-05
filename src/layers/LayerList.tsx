@@ -21,6 +21,7 @@ import {
     useNotify,
     useRefresh,
     useUnselectAll,
+    NumberField,
 } from "react-admin";
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
@@ -228,6 +229,8 @@ export const LayerList = () => {
                 <TextField source="year" />
                 <BooleanField source="enabled" />
                 <TextField source="style_name" />
+                <TextField source="min_value" />
+                <TextField source="max_value" />
                 <DateField source="last_updated" showTime />
                 <DateField source="uploaded_at" label="Uploaded at (UTC)" showTime />
             </DatagridConfigurable>
