@@ -53,15 +53,15 @@ const StyleSelectMenu = () => {
 
     const handleChange = (event: SelectChangeEvent) => {
         // Update the selected style for all selected layers
+        console.log("EVENT", event.target.value);
         updateMany(
             'layers',
-            { ids: selectedIds, data: { style_name: event.target.value } }
+            { ids: selectedIds, data: { style_id: event.target.value } }
         ).then(() => {
             // Refresh the list to reflect the changes
             refresh();
             unselectAll();
-            notify('Updating layer style (this may take some time in the background)');
-
+            notify('Updating layers with new style: ' + event.target.value);
         }).catch(() => {
             notify('Error updating layer style');
         });
@@ -228,7 +228,7 @@ export const LayerList = () => {
                 <TextField source="variable" />
                 <TextField source="year" />
                 <BooleanField source="enabled" />
-                <TextField source="style_name" />
+                <TextField source="style.name" />
                 <TextField source="min_value" />
                 <TextField source="max_value" />
                 <DateField source="last_updated" showTime />

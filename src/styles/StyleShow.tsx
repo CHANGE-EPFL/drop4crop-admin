@@ -1,6 +1,9 @@
 import {
+    ArrayField,
+    Datagrid,
     DateField,
     Show,
+    SimpleFormIterator,
     SimpleShowLayout,
     TextField,
 } from "react-admin";
@@ -10,14 +13,16 @@ export const StyleShow = () => {
         <Show >
             <SimpleShowLayout >
                 <TextField source="name" />
-                <TextField source="filename" />
-                <DateField source="dateCreated" showTime />
-                <DateField source="dateModified" showTime />
-                <TextField source="format" />
-                <TextField source="languageVersion.version" label="Version" />
-                <TextField source="variable" />
-                <TextField source="year" />
-                <TextField source="sld" component='pre' width={100} />
+                <ArrayField source="style" >
+                    <Datagrid bulkActionButtons={false}>
+                        <TextField source="value" />
+                        <TextField source="red" />
+                        <TextField source="green" />
+                        <TextField source="blue" />
+                        <TextField source="opacity" />
+                        <TextField source="label" />
+                    </Datagrid >
+                </ArrayField>
             </SimpleShowLayout>
         </Show>
     )

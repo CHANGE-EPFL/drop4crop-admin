@@ -30,7 +30,7 @@ const LayerEdit = () => {
                 <SelectInput source="variable" choices={variablesItems} />
                 <SelectInput source="year" choices={yearItems} />
                 <BooleanInput source="enabled" />
-                <ReferenceInput source="style_name" reference="styles" >
+                <ReferenceInput source="style_id" reference="styles" >
                     <SelectInput />
                 </ReferenceInput>
             </SimpleForm>

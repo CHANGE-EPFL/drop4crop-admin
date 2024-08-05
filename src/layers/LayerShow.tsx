@@ -13,6 +13,9 @@ export const LayerShow = () => {
         <Show >
             <SimpleShowLayout>
                 <TextField source="id" />
+                <ReferenceField source="style_id" reference="styles" >
+                    <TextField source="name" />
+                </ReferenceField>
                 <TextField source="layer_name" />
                 <TextField source="filename" />
                 <TextField source="crop" />
