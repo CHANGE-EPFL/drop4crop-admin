@@ -34,7 +34,6 @@ export const UppyUploader = () => {
     }).use(XHR, {
         endpoint: '/api/layers/uploads',
         headers: headers,
-        shouldRetry: false,
         onAfterResponse: (response) => {
             console.log('onAfterResponse', response);
             const parsedResponse = JSON.parse(response.response);
