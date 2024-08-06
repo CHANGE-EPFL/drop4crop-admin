@@ -34,7 +34,7 @@ const Dashboard = () => {
         isPending: stylesIsPending,
         error: stylesError
     } = useGetList('layers', {
-        filter: { style_name: null }
+        filter: { style: null }
     });
 
     const totalLayersWithoutStyles = total - totalStyles;
@@ -53,14 +53,6 @@ const Dashboard = () => {
 
     const handleRedirectAllLayers = () => {
         redirect('list', '/layers');
-    }
-
-    const handleSyncStyles = () => {
-        dataProvider.syncStylesToLayer().then(() => {
-            notify("Styles syncing in progress")
-        }).catch((error) => {
-            notify(`Error syncing styles: ${error}`)
-        });
     }
 
     if (isPending || enabledLayersIsPending) return <Loading />;
@@ -107,11 +99,7 @@ const Dashboard = () => {
                                             <TableRow>
                                                 <TableCell align="center">Layers with styles</TableCell>
                                                 <TableCell align="center">{totalLayersWithoutStyles} ({(totalLayersWithoutStyles / total * 100).toFixed(2)}%)</TableCell>
-                                                <TableCell align="center">
-                                                    <Button variant='contained' onClick={handleSyncStyles}>Sync styles from geoServer</Button>
-                                                    <br />
-                                                    <Typography variant='caption'>In case the layers aren't matching or are missing here in the portal, this will sync the style names from geoserver to the portal. It does not affect how they look in the map dashboard</Typography>
-                                                </TableCell>
+                                                <TableCell align="center"></TableCell>
                                             </TableRow>
                                         </TableBody>
                                     </Table>

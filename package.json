@@ -10,9 +10,13 @@
     "format": "prettier --write ./src"
   },
   "dependencies": {
+    "@uppy/core": "^4.1.0",
+    "@uppy/drag-drop": "^4.0.1",
+    "@uppy/file-input": "^4.0.0",
+    "@uppy/react": "^4.0.1",
+    "@uppy/status-bar": "^4.0.1",
+    "@uppy/xhr-upload": "^4.0.2",
     "axios": "^1.6.0",
-    "filepond": "^4.31.1",
-    "filepond-plugin-file-validate-type": "^1.2.9",
     "keycloak-js": "^24.0.5",
     "ol": "^9.2.4",
     "plotly.js": "^2.33.0",

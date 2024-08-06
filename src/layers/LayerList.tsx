@@ -39,6 +39,7 @@ import { Fragment, useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FilePondUploaderList } from './uploader/FilePond';
+import { UppyUploader } from "./uploader/Uppy";
 
 const StyleSelectMenu = () => {
     const { data, loading, error: errorGetStyles } = useGetList('styles');
@@ -216,7 +217,7 @@ export const LayerList = () => {
             sort={{ field: 'uploaded_at', order: 'DESC' }}
             empty={false}
         >
-            <FilePondUploaderList />
+            <UppyUploader />
             <DatagridConfigurable
                 rowClick="show"
                 bulkActionButtons={<BulkActionButtons />}
