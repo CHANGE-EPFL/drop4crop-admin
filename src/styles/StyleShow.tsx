@@ -14,19 +14,12 @@ export const ColorBar = () => {
     if (!record || !record.style) return null;
     const style = record.style;
 
+    const gradient = `linear-gradient(to right, ${style.map(
+        color => `rgba(${color.red},${color.green},${color.blue},${color.opacity / 255})`
+    ).join(", ")})`;
+
     return (
-        <div style={{ display: 'flex', height: '20px', marginBottom: '10px' }}>
-            {style.map((color, index) => (
-                <div
-                    key={index}
-                    style={{
-                        backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.opacity / 255})`,
-                        width: `${100 / style.length}%`
-                    }}
-                    title={color.label}
-                ></div>
-            ))}
-        </div>
+        <div style={{ height: '20px', marginBottom: '10px', background: gradient }} />
     );
 };
 

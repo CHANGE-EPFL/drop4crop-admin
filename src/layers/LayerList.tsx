@@ -45,24 +45,12 @@ import { UppyUploader } from "./uploader/Uppy";
 export const ColorBar = () => {
     const record = useRecordContext();
     if (!record || !record.style) return null;
-    console.log("RECORD", record);
     const style = record.style.style;
-
+    const gradient = `linear-gradient(to right, ${style.map(
+        color => `rgba(${color.red},${color.green},${color.blue},${color.opacity / 255})`
+    ).join(", ")})`;
     return (
-        <div style={{ display: 'flex', height: '20px' }}>
-
-            {record.style.name} {style.map((color, index) => (
-                < div
-                    key={index}
-                    style={{
-                        backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.opacity / 255})`,
-                        width: `${100 / style.length}%`
-                    }}
-                    title={color.label}
-                ></div>
-            ))
-            }
-        </div >
+        <div style={{ height: '20px', marginBottom: '10px', background: gradient }} />
     );
 };
 
@@ -247,7 +235,6 @@ export const LayerList = () => {
                 rowClick="show"
                 bulkActionButtons={<BulkActionButtons />}
                 size="small"
-            // style={{ tableLayout: 'fixed' }}
             >
                 <TextField source="crop" />
                 <TextField source="water_model" />
@@ -256,7 +243,8 @@ export const LayerList = () => {
                 <TextField source="variable" />
                 <TextField source="year" />
                 <BooleanField source="enabled" />
-                <ColorBar label="Style" />
+                <TextField source="style.name" label="Style" />
+                <ColorBar label="Style Bar" />
             </DatagridConfigurable>
         </List>
     );
