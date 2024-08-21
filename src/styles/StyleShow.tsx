@@ -9,7 +9,7 @@ import {
 } from "react-admin";
 
 // Custom ColorBar component
-const ColorBar = () => {
+export const ColorBar = () => {
     const record = useRecordContext();
     if (!record || !record.style) return null;
     const style = record.style;

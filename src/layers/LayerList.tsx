@@ -22,6 +22,7 @@ import {
     useRefresh,
     useUnselectAll,
     NumberField,
+    useRecordContext,
 } from "react-admin";
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
@@ -40,6 +41,30 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FilePondUploaderList } from './uploader/FilePond';
 import { UppyUploader } from "./uploader/Uppy";
+
+export const ColorBar = () => {
+    const record = useRecordContext();
+    if (!record || !record.style) return null;
+    console.log("RECORD", record);
+    const style = record.style.style;
+
+    return (
+        <div style={{ display: 'flex', height: '20px' }}>
+
+            {record.style.name} {style.map((color, index) => (
+                < div
+                    key={index}
+                    style={{
+                        backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.opacity / 255})`,
+                        width: `${100 / style.length}%`
+                    }}
+                    title={color.label}
+                ></div>
+            ))
+            }
+        </div >
+    );
+};
 
 const StyleSelectMenu = () => {
     const { data, loading, error: errorGetStyles } = useGetList('styles');
@@ -221,6 +246,8 @@ export const LayerList = () => {
             <DatagridConfigurable
                 rowClick="show"
                 bulkActionButtons={<BulkActionButtons />}
+                size="small"
+            // style={{ tableLayout: 'fixed' }}
             >
                 <TextField source="crop" />
                 <TextField source="water_model" />
@@ -229,11 +256,7 @@ export const LayerList = () => {
                 <TextField source="variable" />
                 <TextField source="year" />
                 <BooleanField source="enabled" />
-                <TextField source="style.name" />
-                <TextField source="min_value" />
-                <TextField source="max_value" />
-                <DateField source="last_updated" showTime />
-                <DateField source="uploaded_at" label="Uploaded at (UTC)" showTime />
+                <ColorBar label="Style" />
             </DatagridConfigurable>
         </List>
     );
