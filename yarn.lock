@@ -521,6 +521,32 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.2.tgz#d8bae93ac8b815b2bd7a98078cf91e2724ef11e5"
   integrity sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==
 
+"@fortawesome/fontawesome-common-types@6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.6.0.tgz#31ab07ca6a06358c5de4d295d4711b675006163f"
+  integrity sha512-xyX0X9mc0kyz9plIyryrRbl7ngsA9jz77mCZJsUkLl+ZKs0KWObgaEBoSgQiYWAsSmjz/yjl0F++Got0Mdp4Rw==
+
+"@fortawesome/fontawesome-svg-core@^6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.6.0.tgz#2a24c32ef92136e98eae2ff334a27145188295ff"
+  integrity sha512-KHwPkCk6oRT4HADE7smhfsKudt9N/9lm6EJ5BVg0tD1yPA5hht837fB87F8pn15D8JfTqQOjhKTktwmLMiD7Kg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.6.0"
+
+"@fortawesome/free-solid-svg-icons@^6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.6.0.tgz#061751ca43be4c4d814f0adbda8f006164ec9f3b"
+  integrity sha512-IYv/2skhEDFc2WGUcqvFJkeK39Q+HyPf5GHUrT/l2pKbtgEIv1al1TKd6qStR5OIwQdN1GZP54ci3y4mroJWjA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.6.0"
+
+"@fortawesome/react-fontawesome@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.2.2.tgz#68b058f9132b46c8599875f6a636dad231af78d4"
+  integrity sha512-EnkrprPNqI6SXJl//m29hpaNzOp1bruISWaOiRtkMi/xSvHJlzc2j2JAYS7egxt/EbjSNV/k6Xy0AQI6vB2+1g==
+  dependencies:
+    prop-types "^15.8.1"
+
 "@humanwhocodes/module-importer@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/module-importer/-/module-importer-1.0.1.tgz#af5b2691a22b44be847b0ca81641c5fb6ad0172c"
@@ -1115,17 +1141,17 @@
     nanoid "^5.0.0"
     preact "^10.5.13"
 
-"@uppy/dashboard@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@uppy/dashboard/-/dashboard-4.0.2.tgz#1fc8d545b461507fbc1d9e347e1133a5fe1786ce"
-  integrity sha512-C1C07wfoOeoo1uMSIVvYRIt+envIs6efqi4EqUSdD93alvd3n4cIC5j7dKEto1rtiQ41V2yCzIKTIKd2CS/8og==
+"@uppy/dashboard@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@uppy/dashboard/-/dashboard-4.0.3.tgz#407c7f19dd8b18c332314bf8e6b3daf97da31905"
+  integrity sha512-ZInm3EGctBtuSIQkVPn0K+8R7e+P0zS5Qp+3eVpw1ID2vVSKEQz578+u/VMEKVPySpOoNb0G68hRMLjkMmlSDA==
   dependencies:
     "@transloadit/prettier-bytes" "^0.3.4"
     "@uppy/informer" "^4.0.0"
-    "@uppy/provider-views" "^4.0.0"
-    "@uppy/status-bar" "^4.0.1"
+    "@uppy/provider-views" "^4.0.1"
+    "@uppy/status-bar" "^4.0.2"
     "@uppy/thumbnail-generator" "^4.0.0"
-    "@uppy/utils" "^6.0.1"
+    "@uppy/utils" "^6.0.2"
     classnames "^2.2.6"
     lodash "^4.17.21"
     memoize-one "^6.0.0"
@@ -1133,12 +1159,12 @@
     preact "^10.5.13"
     shallow-equal "^3.0.0"
 
-"@uppy/drag-drop@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@uppy/drag-drop/-/drag-drop-4.0.1.tgz#48066710bbadac51065f526acdd572c74584ddc7"
-  integrity sha512-YIi//ox0fRmYRlynQ8TcqnxnHzAwvrAxaZcCCXepmzQzpYZH0HbXkjHl6Vht3k+skQvGihX+bjUuu0yB/VZW6w==
+"@uppy/drag-drop@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@uppy/drag-drop/-/drag-drop-4.0.2.tgz#fce95bddf344518818b541f74493b1a6e5e2c585"
+  integrity sha512-0/b8hBAX8tDBikkr2tORtKT3gEcCxQlygSBCJrbLTQTDh4poTpmHWyquqvsCcBtW7AqULhQn5h/xSSacBnEf/Q==
   dependencies:
-    "@uppy/utils" "^6.0.0"
+    "@uppy/utils" "^6.0.2"
     preact "^10.5.13"
 
 "@uppy/file-input@^4.0.0":
@@ -1165,12 +1191,12 @@
     "@uppy/utils" "^6.0.0"
     preact "^10.5.13"
 
-"@uppy/provider-views@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@uppy/provider-views/-/provider-views-4.0.0.tgz#9f98c24d425429c739d67c9f0d6d2d56ead28c16"
-  integrity sha512-sFRPofSuPQ6pgECi0YR1Ml2eEhyIqaIGKwg8XjzhcfVT1POB5B/evQ/ocYJgZyZ2qb1TAKyzeBRbiSH+2C2Uaw==
+"@uppy/provider-views@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@uppy/provider-views/-/provider-views-4.0.1.tgz#66f7ad0c8038569762a390c0d7735e8751e77a22"
+  integrity sha512-oAOIVdCSPIpDZJXwU83o+13+qWYrIfRzJaXom7ZsJpj+WDbtFjML5iF3evDmqt22V3HwOC0N187lZvcO/9RwFA==
   dependencies:
-    "@uppy/utils" "^6.0.0"
+    "@uppy/utils" "^6.0.2"
     classnames "^2.2.6"
     nanoid "^5.0.0"
     p-queue "^8.0.0"
@@ -1184,13 +1210,13 @@
     "@uppy/utils" "^6.0.0"
     use-sync-external-store "^1.2.0"
 
-"@uppy/status-bar@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@uppy/status-bar/-/status-bar-4.0.1.tgz#1062b9ce422cc2502fe6677b56ffa15094dd546e"
-  integrity sha512-EMnEWMAK4Itvt/zjq2c8zqEL3AgbPPv7vcGBfLiURYH0Nspf1VRtRu5nll4c1psn8Zlxg+pEnWbbPwC7wNOAOA==
+"@uppy/status-bar@^4.0.2", "@uppy/status-bar@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@uppy/status-bar/-/status-bar-4.0.3.tgz#74101de0cd9c5dec26e06578bfa72bb960d3ef85"
+  integrity sha512-ckujiEQwHgpJGa5Q6OZF+hJ+3JSMgs/7vyl4aeBvV0zSWoPSg/W10TpyGeNvMaaAsbAs4UB+0LuUjVu/vSmFcw==
   dependencies:
     "@transloadit/prettier-bytes" "^0.3.4"
-    "@uppy/utils" "^6.0.1"
+    "@uppy/utils" "^6.0.2"
     classnames "^2.2.6"
     preact "^10.5.13"
 
@@ -1211,6 +1237,14 @@
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-6.0.1.tgz#4c6425b0920c04484e8c4af4fcb6d168a3b28bb1"
   integrity sha512-GrqzRYe7MQPdA1QieLaD+J7PvvK/An/HJGm365b6piDNw3JjpUjghBOGpPjoSLGDbSbDh+HP2Nj9Jx3fvMyvDQ==
+  dependencies:
+    lodash "^4.17.21"
+    preact "^10.5.13"
+
+"@uppy/utils@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-6.0.2.tgz#fc5e86fa58e952fb075ca4bc0523fb5e6aa44053"
+  integrity sha512-ZoNeAa1YTKSlcvXe1SP3POjzjRZ9jSojorbst03vwd1Ks9vHPGf6pne61DowTXHZ3HMj1vpcIaQ1VIEWeeADlA==
   dependencies:
     lodash "^4.17.21"
     preact "^10.5.13"
@@ -2628,16 +2662,6 @@ file-selector@^0.5.0:
   integrity sha512-s8KNnmIDTBoD0p9uJ9uD0XY38SCeBOtj0UMXyQSLg1Ypfrfj8+dAvwsLjYQkQ2GjhVtp2HrnF5cJzMhBjfD8HA==
   dependencies:
     tslib "^2.0.3"
-
-filepond-plugin-file-validate-type@^1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.2.9.tgz#84787c027354a459d91382e77adc9463ceb0182d"
-  integrity sha512-Tzv07aNdZvjUXDRA3XL16QMEvh6llDrXlcZ6W0eTHQ+taHaVg/JKJTFs/AViO+6ZcpPCcQStbhYEL2HoS+vldw==
-
-filepond@^4.31.1:
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/filepond/-/filepond-4.31.1.tgz#42550897ddf614ac03c5322e6b16bd6e9e98844c"
-  integrity sha512-yWYK91Ky72L2AG7BlI8Cb0UjvJz+DjuYdLN1JbkJg8qmoiZ9AU5b5MuOkHmExk/9jQ5R7tRT+H+b8wDiFEJlxQ==
 
 fill-range@^7.1.1:
   version "7.1.1"

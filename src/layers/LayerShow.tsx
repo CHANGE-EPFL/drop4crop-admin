@@ -20,7 +20,6 @@ export const ColorBar = () => {
 
     return (
         <div style={{ height: '20px', marginBottom: '10px', background: gradient }} />
-
     );
 };
 
@@ -36,6 +35,7 @@ export const LayerShow = () => {
                 <TextField source="layer_name" />
                 <TextField source="filename" />
                 <TextField source="crop" />
+                <BooleanField source="is_crop_specific" />
                 <TextField source="water_model" />
                 <TextField source="climate_model" />
                 <TextField source="scenario" />

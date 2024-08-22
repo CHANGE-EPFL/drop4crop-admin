@@ -1,6 +1,5 @@
 import {
     List,
-    Datagrid,
     TextField,
     BooleanField,
     BulkDeleteButton,
@@ -11,22 +10,18 @@ import {
     useGetList,
     Loading,
     Pagination,
-    DateField,
     TopToolbar,
     CreateButton,
     ExportButton,
     useUpdateMany,
     useListContext,
-    useNotificationContext,
     useNotify,
     useRefresh,
     useUnselectAll,
-    NumberField,
     useRecordContext,
 } from "react-admin";
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
-import MailIcon from '@mui/icons-material/MailOutline';
 import CategoryIcon from '@mui/icons-material/LocalOffer';
 import {
     globalWaterModelsItems,
@@ -36,11 +31,16 @@ import {
     variablesItems,
     yearItems
 } from '../options';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { FilePondUploaderList } from './uploader/FilePond';
 import { UppyUploader } from "./uploader/Uppy";
+import {
+    faWater, faCloudSun, faCogs, faLayerGroup, faCalendarAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GrassIcon from '@mui/icons-material/Grass';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export const ColorBar = () => {
     const record = useRecordContext();
@@ -142,8 +142,12 @@ export const FilterSidebar = () => {
                     <FilterListItem label="True" value={{ enabled: true }} />
                     <FilterListItem label="False" value={{ enabled: false }} />
                 </FilterList>
+                <FilterList label="Crop Specific" icon={<CheckCircleIcon />}>
+                    <FilterListItem label="True" value={{ is_crop_specific: true }} />
+                    <FilterListItem label="False" value={{ is_crop_specific: false }} />
+                </FilterList>
 
-                <FilterList label="Crop" icon={<CategoryIcon />}>
+                <FilterList label="Crop" icon={<GrassIcon />}>
                     {cropItems.map(item => (
                         <FilterListItem
                             key={item.id}
@@ -152,7 +156,7 @@ export const FilterSidebar = () => {
                         />
                     ))}
                 </FilterList>
-                <FilterList label="Water model" icon={<MailIcon />}>
+                <FilterList label="Water model" icon={<FontAwesomeIcon icon={faWater} />}>
                     {globalWaterModelsItems.map(item => (
                         <FilterListItem
                             key={item.id}
@@ -161,7 +165,7 @@ export const FilterSidebar = () => {
                         />
                     ))}
                 </FilterList>
-                <FilterList label="Climate model" icon={<CategoryIcon />}>
+                <FilterList label="Climate model" icon={<FontAwesomeIcon icon={faCloudSun} />}>
                     {climateModelsItems.map(item => (
                         <FilterListItem
                             key={item.id}
@@ -170,7 +174,7 @@ export const FilterSidebar = () => {
                         />
                     ))}
                 </FilterList>
-                <FilterList label="Scenario" icon={<CategoryIcon />}>
+                <FilterList label="Scenario" icon={<FontAwesomeIcon icon={faCogs} />}>
                     {scenariosItems.map(item => (
                         <FilterListItem
                             key={item.id}
@@ -179,7 +183,7 @@ export const FilterSidebar = () => {
                         />
                     ))}
                 </FilterList>
-                <FilterList label="Variable" icon={<CategoryIcon />}>
+                <FilterList label="Variable" icon={<FontAwesomeIcon icon={faLayerGroup} />}>
                     {variablesItems.map(item => (
                         <FilterListItem
                             key={item.id}
@@ -188,7 +192,7 @@ export const FilterSidebar = () => {
                         />
                     ))}
                 </FilterList>
-                <FilterList label="Year" icon={<CategoryIcon />}>
+                <FilterList label="Year" icon={<FontAwesomeIcon icon={faCalendarAlt} />}>
                     {yearItems.map(item => (
                         <FilterListItem
                             key={item.id}
@@ -243,6 +247,7 @@ export const LayerList = () => {
                 <TextField source="variable" />
                 <TextField source="year" />
                 <BooleanField source="enabled" />
+                <BooleanField source="is_crop_specific" label="Crop specific" />
                 <TextField source="style.name" label="Style" />
                 <ColorBar label="Style Bar" />
             </DatagridConfigurable>
