@@ -23,7 +23,8 @@ export const UppyUploader = () => {
         The filename will be used to interpret the layer properties
         and must be in the format of
         {crop}_{watermodel}_{climatemodel}_{scenario}_{variable}_{year}.tif
-        (eg. rice_pcr-globwb_miroc5_rcp60_rg_2080)
+        (eg. rice_pcr-globwb_miroc5_rcp60_rg_2080) or {crop}_{crop-specific-variable}.tif.
+        If the layer already exists it will be deleted and readded with the new file.
     `;
     const headers = {
         authorization: `Bearer ${token}`,
