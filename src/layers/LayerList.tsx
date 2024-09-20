@@ -20,6 +20,7 @@ import {
     useUnselectAll,
     useRecordContext,
 } from "react-admin";
+import { useState } from 'react';
 import { FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent, Typography } from '@mui/material';
 import CategoryIcon from '@mui/icons-material/LocalOffer';
@@ -54,30 +55,34 @@ export const ColorBar = () => {
     );
 };
 
+
 const StyleSelectMenu = () => {
-    const { data, loading, error: errorGetStyles } = useGetList('styles');
-    const [updateMany, { isPending, error: errorUpdateMany }] = useUpdateMany();
+    const { data, loading } = useGetList('styles');
+    const [updateMany] = useUpdateMany();
     const { selectedIds } = useListContext();
     const notify = useNotify();
     const refresh = useRefresh();
     const unselectAll = useUnselectAll('layers');
+    const [selectedStyle, setSelectedStyle] = useState('');  // State for the selected value
 
     if (loading) return <Loading />;
     if (!data) return null;
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event) => {
+        const newStyleId = event.target.value;
+        setSelectedStyle(newStyleId);  // Update the selected value state
+
         // Update the selected style for all selected layers
-        console.log("EVENT", event.target.value);
         updateMany(
             'layers',
-            { ids: selectedIds, data: { style_id: event.target.value } }
+            { ids: selectedIds, data: { style_id: newStyleId } }
         ).then(() => {
-            // Refresh the list to reflect the changes
-            refresh();
-            unselectAll();
-            notify('Updating layers with new style: ' + event.target.value);
+            notify('Updating layers with new style: ' + newStyleId);
+            refresh(); // Refresh the list to reflect the changes
+            unselectAll(); // Unselect all after update
+            setSelectedStyle(''); // Reset the selected style to empty
         }).catch(() => {
-            notify('Error updating layer style');
+            notify('Error updating layer style', { type: 'error' });
         });
     };
 
@@ -91,11 +96,11 @@ const StyleSelectMenu = () => {
         <>
             <Select
                 label="Style"
-                // value={selectedStyle}
-                onChange={handleChange}
+                value={selectedStyle}  // Bind value to the state
+                onChange={handleChange}  // Handle changes
                 displayEmpty
-                renderValue={(value) => (value ? data.find(style => style.id === value)?.name : "Select style")}
-                sx={{ height: '32px' }} // Add this line to shrink the height
+                renderValue={(value) => value ? data.find(style => style.id === value)?.name : "Select style"}
+                sx={{ height: '32px' }}
             >
                 <MenuItem disabled value="">
                     <em>Select style</em>
@@ -104,7 +109,7 @@ const StyleSelectMenu = () => {
             </Select>
         </>
     );
-}
+};
 
 const BulkActionButtons = () => {
     // Use the data from the styles endpoint to populate a drop down to
@@ -132,7 +137,10 @@ const BulkActionButtons = () => {
 
 export const FilterSidebar = () => {
     return (
-        <Card sx={{ order: -1, mr: 2, mt: 6, width: 200 }}>
+        <Card sx={{
+            order: -1, mr: 2, mt: 6, width:
+                400
+        }}>
             <CardContent>
                 <Typography variant="h6" gutterBottom>
                     Filters
